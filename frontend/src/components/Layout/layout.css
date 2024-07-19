@@ -1,0 +1,13 @@
+.main {
+    display: flex;
+    justify-content: center;
+    background-image: url(./background.jpg);
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 60px;
+    right: 0;
+    bottom: 25px;
+}

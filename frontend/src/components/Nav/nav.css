@@ -1,0 +1,5 @@
+.nav__item {
+    list-style-type: none;
+    display: inline;
+    margin-right: 10px;
+}

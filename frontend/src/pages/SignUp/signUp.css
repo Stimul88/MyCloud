@@ -1,0 +1,30 @@
+.signup-form {
+    margin: 40px auto;
+    width: 250px;
+    height: 370px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.signup-background {
+    position: absolute;
+
+    /*margin-bottom: auto;*/
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 45px auto;
+    background-color: rgba(245,205,130,0.5);
+    width: 240px;
+    border-radius: 15px;
+    height: 360px;
+    z-index: -1;
+}
+
+.d-grid {
+    margin-top: 10px;
+}

@@ -1,0 +1,57 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 30px;
+}
+
+.logo {
+    height: 40px;
+    cursor: pointer;
+}
+
+.nav {
+
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.enter, .logout, .registration {
+    border: 1px solid transparent;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.enter:hover {
+    background-color: gainsboro;
+}
+
+/*.registration {*/
+/*    border: 1px solid transparent;*/
+/*    padding: 10px;*/
+/*    border-radius: 10px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+.registration:hover {
+    background-color: gainsboro;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background-color: orange;
+    color: #ffffff;
+    font-size: 20px;
+    border-radius: 50%;
+    font-weight: 400;
+    margin-right: 10px;
+}
