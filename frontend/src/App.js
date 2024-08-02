@@ -1,8 +1,7 @@
 import './App.css';
 import { Route, Routes} from "react-router-dom";
 import {Layout} from "./components";
-import {Home, Disk, Movie, NotFound, Login, SignUp} from "./pages";
-import {Users} from "./pages/Users/Users";
+import {Home, Disk, NotFound, Login, SignUp, UsersDisk, Users} from "./pages";
 
 
 function App() {
@@ -11,15 +10,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/movie" element={<Movie />} />
           <Route path="/disk" element={<Disk />} />
+          <Route path="/userdisk" element={<UsersDisk />} />
           <Route path="/users" element={<Users />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>
-        {/*<Route path="/login" element={<Login />} />*/}
-        {/*<Route path="/signup" element={<SignUp />} />*/}
       </Routes>
     </div>
   );

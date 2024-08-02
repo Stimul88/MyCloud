@@ -1,21 +1,56 @@
 import './usersCard.css'
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {fetchDisk} from "../../store/disk";
+import {deleteStatus, fetchDisk} from "../../store/disk";
+import {calculateSum} from "../../js/calculateSum";
+import axios from "axios";
+import {deleteUserStatus} from "../../store/users";
+
+const server = process.env.REACT_APP_API_URL;
 
 export const UsersCard = ({props}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { owners } = props
+  // console.log(calculateSum(owners))
+
   const getFiles = (e) => {
     e.preventDefault()
     dispatch(fetchDisk(props.id))
+    navigate('/userdisk')
   }
+
+  const deleteUser = () => {
+    axios
+      .delete(`${server}/delete_user/${props.id}/`)
+      .then(response => {
+        dispatch(deleteUserStatus("deleted successfully!"))
+      })
+  }
+
+
   return (
-    <>
-      <button
+    <div className="userCard">
+      <span className="name">{props.username}</span>
+      <span className="email">{props.email}</span>
+      <span className="full_name">{props.first_name}</span>
+      <span className="admin">Admin:  {props.is_superuser === true ? "Да": "Нет"}</span>
+      <span className="count_files">Файлы,шт: </span>
+      <span className="count">{props.owners.length} </span>
+      <span className="size-files">Общий размер: </span>
+      <span className="size-users">
+        {calculateSum(owners, 'size')} </span>
+      <div
         onClick={getFiles}
-        className="userCard">{props.username}</button>
-    </>
+        className="change">&#9998;</div>
+      <div
+        onClick={deleteUser}
+        className="delete">&#x2716;</div>
+
+      {/*<button*/}
+      {/*  onClick={getFiles}*/}
+      {/*  className="userCard">{props.username}</button>*/}
+    </div>
   )
 }

@@ -16,7 +16,6 @@ export const fetchLogin = createAsyncThunk(
       withCredentials: true
     }
       const response = await axios.post(`${server}token/`, user, config)
-      console.log(response)
       // axios.defaults.headers.common['Authorization'] = `Bearer ${user['access']}`;
       return response.data
     }
@@ -32,21 +31,25 @@ export const fetchLogin = createAsyncThunk(
 const login = createSlice({
   name: "auth",
   initialState: {
-    loginStatus: "",
-    info: {},
+    loginEnter: false,
+    loginInfo: [],
     saveLogin: "",
     loginLoad: false,
     refresh: '',
     access: '',
+    idUser: '',
     loginError: {},
   }
   ,
   reducers: {
     cleanInfo: (state) => {
-      state.info = {};
+      state.loginInfo = {};
     },
     saveLogin: (state, action) => {
       state.saveLogin = action.payload;
+    },
+    saveIdUser: (state, action) => {
+      state.idUser = action.payload;
     },
     // getInfo: (state, action) => {
     //   state.info = action.payload;
@@ -62,19 +65,18 @@ const login = createSlice({
     builder.addCase(fetchLogin.pending, (state) => {
       state.loginLoad = true;
       state.loginError = '';
-      state.info = {};
+      state.loginInfo = [];
     });
     builder.addCase(
       fetchLogin.fulfilled, (state, action) => {
-        // console.log(action)
-        state.info = action.payload;
+        state.loginInfo = action.payload;
         state.refresh = action.payload.refresh;
         state.access = action.payload.access;
 
       });
     builder.addCase(
       fetchLogin.rejected,(state, action) => {
-        console.log(action.payload)
+        state.loginInfo = [];
         state.loginLoad = false;
         state.loginError = action.payload;
       });
@@ -82,5 +84,5 @@ const login = createSlice({
 });
 
 
-export const { saveLogin, cleanInfo, getEnterStatus} = login.actions;
+export const { saveLogin, cleanInfo, getEnterStatus, saveIdUser} = login.actions;
 export default login.reducer;

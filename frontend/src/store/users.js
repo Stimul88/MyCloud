@@ -31,15 +31,16 @@ const users = createSlice({
     saveLogin: "",
     usersLoad: false,
     usersError: {},
+    deleteUser: '',
   }
   ,
   reducers: {
     // cleanInfo: (state) => {
     //   state.info = {};
     // },
-    // saveLogin: (state, action) => {
-    //   state.saveLogin = action.payload;
-    // },
+    deleteUserStatus: (state, action) => {
+      state.deleteUser = action.payload;
+    },
     // // getInfo: (state, action) => {
     // //   state.info = action.payload;
     // // },
@@ -54,6 +55,7 @@ const users = createSlice({
     builder.addCase(fetchUsers.pending, (state) => {
       state.usersLoad = true;
       state.usersError = '';
+      state.deleteUser = '';
       state.usersArray = {};
     });
     builder.addCase(
@@ -65,10 +67,11 @@ const users = createSlice({
       fetchUsers.rejected,(state, action) => {
         console.log(action.payload)
         state.loginError = action.payload;
+        state.deleteUser = '';
       });
   }
 });
 
 
-export const { saveLogin, cleanInfo, getEnterStatus} = users.actions;
+export const { deleteUserStatus, cleanInfo, getEnterStatus} = users.actions;
 export default users.reducer;

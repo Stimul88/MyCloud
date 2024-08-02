@@ -26,12 +26,13 @@ export function SignUp() {
   useEffect(() => {
     console.log(authInfo)
 
-    if(authError !== ''){
-      dispatch(clearAuthError(''))
-      alert('Юзер с таким логином или паролем уже существует')
-      return
-    }
+    // if(authError !== ''){
+    //   dispatch(clearAuthError(''))
+    //   alert('Юзер с таким логином или паролем уже существует')
+    //   return
+    // }
     if(Object.keys(authInfo).length){
+
 
       navigate("/login")
     }

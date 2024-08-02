@@ -4,23 +4,22 @@ import logo from './logo.png';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getAuthStatus} from "../../store/auth";
-import {cleanInfo, getEnterStatus} from "../../store/login";
+import {cleanInfo, getEnterStatus, saveIdUser} from "../../store/login";
 import {useEffect, useState} from "react";
 import {loginWord} from "../../js/loginWord";
 import {fetchLogout} from "../../store/logout";
+import {cleanUserInfo} from "../../store/user";
 
 export const Header = () => {
-  // const { enterStatus } = useSelector((state) => state.auth);
-  const { info, saveLogin, loginError } = useSelector((state) => state.login);
+  const { userInfo } = useSelector((state) => state.user);
+  const { loginInfo, saveLogin, loginError } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const [isAuth, setIsAuth] = useState(false)
 
-  useEffect(() => {
-
-  }, [isAuth])
-
-  console.log(info)
-
+  // useEffect(() => {
+  //
+  // }, [isAuth])
+  //
   // useEffect(() => {
   //   dispatch(getEnterStatus(false))
   //   // dispatch(getStatus(''))
@@ -28,7 +27,9 @@ export const Header = () => {
 
   const logoutEnter = () => {
     dispatch(fetchLogout())
+    dispatch(saveIdUser(''))
     localStorage.clear();
+    dispatch(cleanUserInfo())
 
     navigate('/')
     dispatch(cleanInfo())
@@ -47,19 +48,19 @@ export const Header = () => {
           <Nav />
         </nav>
         <div className="buttons">
-          {!Object.keys(info).length && <button
+          {!Object.keys(loginInfo).length && <button
             className="enter"
             onClick={() => navigate('/login')}
           >Войти</button>}
-          {!Object.keys(info).length && <button
+          {!Object.keys(loginInfo).length && <button
             className="registration"
             onClick={() => navigate('/signup')}
           >Зарегистрироваться</button>}
-          {Object.keys(info).length !== 0 && <div
+          {Object.keys(loginInfo).length !== 0 && <div
             className="avatar"
             id="avatar"
           >{loginWord(saveLogin)}</div>}
-          {Object.keys(info).length !== 0 && <button
+          {Object.keys(loginInfo).length !== 0 && <button
             className="logout"
             onClick={logoutEnter}
           >Выход</button>}

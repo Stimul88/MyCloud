@@ -1,0 +1,86 @@
+.file-info {
+    display: flex;
+    /*justify-content: space-between;*/
+    width: 100%;
+    height: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    /*background-color: white;*/
+    background-color: rgba(255,255,255,0.5);
+    /*border: 1px solid black;*/
+    vertical-align: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.filename {
+    /*margin-right: 10px;*/
+    position: absolute;
+    left: 15px;
+    cursor: pointer;
+}
+
+.size {
+    position: absolute;
+    left: 250px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.title {
+    position: absolute;
+    left: 400px;
+}
+
+.data {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 550px;
+    font-size: 12px;
+}
+
+.data2 {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 700px;
+    font-size: 12px;
+}
+
+.link {
+    position: absolute;
+    margin-left: 10px;
+    right: 140px;
+}
+
+.copy-link {
+    position: absolute;
+    right: 100px;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.change {
+    position: absolute;
+    right: 50px;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    cursor: pointer;
+    /*margin-right: 10px;*/
+}
+
+.delete {
+    position: absolute;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    cursor: pointer;
+}

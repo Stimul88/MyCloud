@@ -1,11 +1,12 @@
 .disk {
     display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
 .left {
     display: flex;
     flex-direction: column;
-    position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
@@ -13,10 +14,6 @@
     background-color: rgba(255,255,255,0.5);
     padding: 10px;
     z-index: 0;
-}
-
-.right {
-
 }
 
 .button {
@@ -27,7 +24,6 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    /*background-color: transparent;*/
     background-color: rgba(255,255,255,0.5);
     font-size: 18px;
     margin-bottom: 5px;
@@ -40,3 +36,15 @@
 .hidden {
     display: none;
 }
+
+.right {
+    left: 5px;
+    position: relative;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 77vw;
+}
+
+.right::-webkit-scrollbar { width: 0; }
+

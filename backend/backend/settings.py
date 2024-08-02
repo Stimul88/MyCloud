@@ -16,6 +16,8 @@ from datetime import timedelta
 import environ
 from pathlib import Path
 
+from corsheaders.defaults import default_headers
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,7 +37,7 @@ SECRET_KEY = 'django-insecure-1%xh%xwm67%&k4hvj)8-t4h07!51dsz11@*=iy$mpyz)k+qikb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -52,31 +54,73 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     # 'rest_framework.authtoken',
-    'corsheaders',
+    "corsheaders",
 ]
 
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
-AUTH_USER_MODEL = "accounts.Client"
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
+
+# CORS_ORIGIN_WHITELIST = [
+# '127.0.0.1',
+#     'localhost'
+# ]
+
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
+
+# CORS_ALLOW_HEADERS = (
+#         'Access-Control-Allow-Headers',
+#         'Access-Control-Allow-Credentials',
+#     )
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
+#
+# CORS_ALLOW_HEADERS = (
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+# )
+
+# AUTH_USER_MODEL = "accounts.Client"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S"
 }
-
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -159,7 +203,7 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-CSRF_TRUSTED_ORIGINS = [env('FRONT_URL')]
+# CSRF_TRUSTED_ORIGINS = [env('FRONT_URL')]
 
 # DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 #
@@ -214,3 +258,19 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'api.User'
+# CORS_ALLOW_HEADERS = "access-control-allow-origin"
+
+# CSRF_TRUSTED_ORIGINS = [env('FRONT_URL')]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000/',]
+# CORS_ORIGIN_WHITELIST = (
+#     env('FRONT_URL'),
+# )
+
+# CORS_ALLOW_HEADERS = (
+#         'Access-Control-Allow-Headers',
+#         'Access-Control-Allow-Credentials',
+#     )
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+

@@ -2,24 +2,21 @@ import React, {useEffect, useState} from "react";
 import "./login.css"
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {clearAuthError, clearAuthInfo, fetchAuth, getAuthStatus} from "../../store/auth";
+import {clearAuthInfo,} from "../../store/auth";
 import {fetchLogin, saveLogin} from "../../store/login";
 import axios from "axios";
-
+import {jwtDecode} from "jwt-decode";
+import {fetchDisk} from "../../store/disk";
+import {fetchUser} from "../../store/user";
 
 export function Login (){
-  const { info, refresh, access, loginError } = useSelector((state) => state.login);
+  const { loginInfo, refresh, access, loginError } = useSelector((state) => state.login);
+  const { userInfo } = useSelector((state) => state.user);
   const [inputData, setInputData] = useState({login: '', password: ''})
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const {login, password} = inputData;
-
-
-
-  useEffect(() => {
-    dispatch(clearAuthInfo(''))
-  }, [])
 
   // useEffect(() => {
   //   dispatch(clearAuthInfo(''))
@@ -27,23 +24,44 @@ export function Login (){
 
 
   useEffect(() => {
-    console.log(loginError)
+
+    if(Object.keys(loginInfo).length === 0) return;
+
+    if(userInfo.is_superuser === false) {
+      navigate("/disk")
+    }
+    if(userInfo.is_superuser === true) {
+      navigate("/users")
+    }
+
+  }, [userInfo])
+
+
+
+
+
+  useEffect(() => {
+    // if(Object.keys(userInfo).length === 0) return;
     if(loginError.message === 401) {
-      console.log(loginError)
+
       alert('Неправильно введен логин или пароль!')
     }
-    if(Object.keys(info).length) {
+    if(Object.keys(loginInfo).length !==0) {
+
       dispatch(saveLogin(login))
       localStorage.clear()
       localStorage.setItem('access_token', access)
       localStorage.setItem('refresh_token', refresh)
       axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
 
-      navigate("/disk")
+      const decoded = jwtDecode(access);
+
+
+      dispatch(fetchUser(decoded.user_id))
+
+      // navigate("/disk")
     }
-  }, [info, loginError])
-
-
+  }, [loginInfo, loginError])
 
   const enter = (e) => {
     e.preventDefault()
@@ -51,8 +69,7 @@ export function Login (){
       username: login,
       password: password,
     }
-
-    dispatch(fetchLogin(user));
+    dispatch(fetchLogin(user))
   }
 
   const inputChange = (e) => {

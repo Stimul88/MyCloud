@@ -14,7 +14,7 @@ export const fetchUser= createAsyncThunk(
         },
         withCredentials: true
       }
-      const response = await axios.get(`${server}user/${id}`, config)
+      const response = await axios.get(`${server}users/${id}`, config)
       return response.data
     }
     catch (error) {
@@ -26,17 +26,17 @@ export const fetchUser= createAsyncThunk(
 const user = createSlice({
   name: "user",
   initialState: {
-    loginStatus: "",
+    userStatus: "",
     userInfo: {},
     saveLogin: "",
     usersLoad: false,
-    usersError: {},
+    usersError: '',
   }
   ,
   reducers: {
-    // cleanInfo: (state) => {
-    //   state.info = {};
-    // },
+    cleanUserInfo: (state) => {
+      state.userInfo = {};
+    },
     // saveLogin: (state, action) => {
     //   state.saveLogin = action.payload;
     // },
@@ -54,22 +54,21 @@ const user = createSlice({
     builder.addCase(fetchUser.pending, (state) => {
       state.usersLoad = true;
       state.usersError = '';
-      state.usersArray = {};
+      state.userInfo = {};
     });
     builder.addCase(
       fetchUser.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.userInfo = action.payload;
 
       });
     builder.addCase(
       fetchUser.rejected,(state, action) => {
-        console.log(action.payload)
         state.loginError = action.payload;
+        state.userInfo = {};
       });
   }
 });
 
 
-export const { saveLogin, cleanInfo, getEnterStatus} = user.actions;
+export const { cleanUserInfo } = user.actions;
 export default user.reducer;

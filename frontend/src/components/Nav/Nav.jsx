@@ -3,7 +3,8 @@ import "./nav.css"
 import {useSelector} from "react-redux";
 
 export const Nav = () => {
-  const { info, saveLogin, loginError } = useSelector((state) => state.login);
+  const { loginInfo, saveLogin, loginError } = useSelector((state) => state.login);
+  const { userInfo } = useSelector((state) => state.user);
   const active = ({ isActive }: { isActive: boolean }) =>
     isActive ? "nav__link-active" : "";
 
@@ -11,17 +12,19 @@ export const Nav = () => {
       <ul className="nav__items">
          <li className="nav__item">
           <NavLink className={active} to="/">
-            Home
+            Домой
           </NavLink>
         </li>
-        <li className="nav__item">
-          <NavLink className={active} to="/users">
-            Users
-          </NavLink>
-        </li>
-        {Object.keys(info).length !== 0 && <li className="nav__item">
+        {userInfo.is_superuser === true &&
+          <li className="nav__item">
+            <NavLink className={active} to="/users">
+              Пользователи
+            </NavLink>
+          </li>
+        }
+        {Object.keys(loginInfo).length !== 0 && !userInfo.is_superuser && <li className="nav__item">
           <NavLink className={active} to="/disk">
-            Disk
+            Диск
           </NavLink>
         </li>}
       </ul>

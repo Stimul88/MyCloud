@@ -1,10 +1,31 @@
-from django.urls import path
-from api.views import HomeView, LogoutView, RegisterView, FilesView, UserView
+from django.conf import settings
+from django.urls import path, re_path
+from django.views.static import serve
+
+# from backend.api.views import HomeView, UserView, FilesView, LogoutView, RegisterView
+
+from api.views import LogoutView, RegisterView, UserWithFilesView, UserView, DeleteFile, FilesView, FileView, \
+    SomeMethodView, DeleteUser
+
+# FileDeleteView
+
+# from api.views import create_files
+
+# from backend.api.views import FilesViewPost
 
 urlpatterns = [
-    path('users/', HomeView.as_view(), name='users'),
-    path('user/<pk>', UserView.as_view(), name='user'),
-    path('users/<pk>/files/', FilesView.as_view(), name='disk'),
+    path('users/', UserWithFilesView.as_view(), name='users'),
+    path('users/<pk>/', UserView.as_view(), name='user'),
+    path('file/<pk>/', FileView.as_view(), name='file'),
+    path('change/<pk>/', SomeMethodView.as_view(), name='put'),
+    path('users/<pk>/files/', FilesView.as_view(), name='files'),
+    path('delete/<pk>/', DeleteFile.as_view(), name='delete_file'),
+    path('delete_user/<pk>/', DeleteUser.as_view(), name='delete_user'),
+    # path('files/', FilesView.as_view(), name='files'),
+    # path('files/', PostAPIView.as_view(), name='filesGet'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view()),
+
+
 ]
+# path('download/', download),

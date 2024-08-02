@@ -6,11 +6,13 @@ import {fetchDisk} from "../../store/disk";
 import {fetchUsers} from "../../store/users";
 import {UsersCard} from "../../components/UsersCard/UsersCard";
 import {fetchPostFile} from "../../store/postFile";
+import {saveIdUser} from "../../store/login";
+import {jwtDecode} from "jwt-decode";
 
 const formData = new FormData();
 
 export function Users() {
-  const { usersArray } = useSelector((state) => state.users);
+  const { usersArray, deleteUser } = useSelector((state) => state.users);
   const { info, refresh, access, loginError } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,122 +27,35 @@ export function Users() {
       navigate("/login")
     } else {
       dispatch(fetchUsers())
+      const decoded = jwtDecode(localStorage.getItem('access_token'));
+      dispatch(saveIdUser(decoded.user_id))
     }
   }, [])
 
-  // const {title, content, file} = inputData;
 
-  console.log(info)
+  useEffect(() => {
+    if(deleteUser !== "deleted successfully!") return;
 
+    // const decoded = jwtDecode(localStorage.getItem('access_token'));
+    // dispatch(fetchDisk(decoded.user_id))
+    dispatch(fetchUsers())
 
-  const inputRef = useRef(null);
+    // dispatch(fetchDisk(info.id))
 
-  const handleClick = (e) => {
-    inputRef.current.click()
-  }
-
-  const handleFileChange = event => {
-    const fileObj = event.target.files && event.target.files[0];
-    if (!fileObj) return;
-    const reader = new FileReader()
-
-    if(fileObj){
-      reader.readAsDataURL(fileObj)
-    }
-    setInputData(fileObj)
-    const body = {title:'dfgdfg',content:'dfgdfg',file:fileObj}
-
-    console.log(body)
-
-    // const fileObj = event.target.files && event.target.files[0];
-    // if (!fileObj) return;
-    // const reader = new FileReader()
-    //
-    // if(fileObj){
-    //   reader.readAsDataURL(fileObj)
-    // }
-
-    // formData.append("image", fileObj);
+  }, [deleteUser])
 
 
-
-    dispatch(fetchPostFile( body));
-
-    console.log('fileObj is', body);
-
-    // 👇️ Reset file input
-    event.target.value = null;
-
-    // 👇️ Is now empty
-    console.log(event.target.files);
-
-    // 👇️ Can still access the file object here
-    // console.log(fileObj);
-    // console.log(fileObj.name);
-  };
 
   return (
     <div className="users">
-      <div className="left">
-        <input
-          ref={inputRef}
-          type="file"
-          onChange={handleFileChange}
-          className="button hidden"/>
-        <button
-          onClick={handleClick}
-          className="button">Загрузить</button>
-        {/*{info.is_superuser &&*/}
-        {/*  Array.from(usersArray).map(item =>*/}
-        {/*      <UsersCard*/}
-        {/*        key={item.id}*/}
-        {/*        props={item}*/}
-        {/*      />)}*/}
-        {/*{!info.is_superuser &&*/}
-        {/*  <>*/}
-        {/*    <input*/}
-        {/*      ref={inputRef}*/}
-        {/*      type="file"*/}
-        {/*      onChange={handleFileChange}*/}
-        {/*      className="button hidden"/>*/}
-        {/*    <button*/}
-        {/*      onClick={handleClick}*/}
-        {/*      className="button">Загрузить</button>*/}
-        {/*  </>*/}
-        {/*}*/}
+      <div className="left"></div>
+      <div className="right">
+        {Array.from(usersArray).map(item =>
+          <UsersCard
+            key={item.id}
+            props={item}
+          />)}
       </div>
-      {/*{info.is_superuser &&*!/*/}
-      {/*  <div className="left">*/}
-      {/*    {Array.from(usersArray).map(item =>*/}
-      {/*      <UsersCard*/}
-      {/*        key={item.id}*/}
-      {/*        props={item}*/}
-      {/*      />)}*/}
-      {/*{info.is_superuser &&*/}
-      {/*  <div className="left">*/}
-      {/*    {Array.from(usersArray).map(item =>*/}
-      {/*      <UsersCard*/}
-      {/*        key={item.id}*/}
-      {/*        props={item}*/}
-      {/*      />)}*/}
-      {/*  <div className="left">*/}
-      {/*      {Array.from(usersArray).map(item =>*/}
-      {/*        <UsersCard*/}
-      {/*          key={item.id}*/}
-      {/*          props={item}*/}
-      {/*        />)}*/}
-      {/*    /!*<input*!/*/}
-      {/*    /!*  ref={inputRef}*!/*/}
-      {/*    /!*  type="file"*!/*/}
-      {/*    /!*  onChange={handleFileChange}*!/*/}
-      {/*    /!*  className="button hidden"/>*!/*/}
-      {/*    /!*<button*!/*/}
-      {/*    /!*  onClick={handleClick}*!/*/}
-      {/*    /!*  className="button">Загрузить</button>*!/*/}
-      {/*    /!*<button*!/*/}
-      {/*    /!*  className="button">Файлы</button>*!/*/}
-      {/*    /!*{<Buttons props={buttons}/>}*!/*/}
-      {/*  <div className="right"></div>*/}
-      </div>
+    </div>
   )
 }

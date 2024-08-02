@@ -8,14 +8,7 @@ export const fetchAuth = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     const response = await axios.post(`${server}register/`, data)
     return response.data
-    // try{
-    //   const response = await axios.post(`${server}register/`, data)
-    //   return response.data
-    //
-    // }catch (err) {
-    //   console.log(err)
-    //   return rejectWithValue(err)
-    // }
+
   }
 )
 
@@ -30,9 +23,6 @@ const auth = createSlice({
   }
   ,
   reducers: {
-    getAuthStatus: (state, action) => {
-      state.authInfo = action.payload;
-    },
     clearAuthInfo: (state, action) => {
       state.authInfo = action.payload;
     },
@@ -44,18 +34,15 @@ const auth = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAuth.pending, (state) => {
       state.authInfo = '';
-      // state.authLoading = true;
       state.authError = '';
     });
     builder.addCase(
       fetchAuth.fulfilled, (state, action) => {
         state.authInfo = action.payload;
-        // state.authLoading = false;
+        state.authError = '';
       });
     builder.addCase(
       fetchAuth.rejected,(state, action) => {
-        // state.authInfo = action.payload;
-        // state.authLoading = false;
         state.authError = action.error.message || 'Server Error';
       });
   }

@@ -19,3 +19,57 @@
 .hidden {
     display: none;
 }
+
+.name {
+    position: absolute;
+    left: 15px;
+}
+
+.email {
+    position: absolute;
+    left: 200px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.full_name {
+    position: absolute;
+    left: 400px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.admin {
+    position: absolute;
+    left: 500px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.count_files {
+    position: absolute;
+    left: 600px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.count {
+    position: absolute;
+    left: 670px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.size-files {
+    position: absolute;
+    left: 700px;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.size-users {
+    position: absolute;
+    left: 800px;
+    font-size: 13px;
+    margin-right: 10px;
+}

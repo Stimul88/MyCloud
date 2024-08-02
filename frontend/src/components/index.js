@@ -3,5 +3,9 @@ import { Layout } from "./Layout/Layout"
 import { Nav } from "./Nav/Nav"
 import { MovieCard } from "./MovieCard/MovieCard"
 import { Footer } from "./Footer/Footer"
+import {OpenImage} from "./OpenImage/OpenImage";
+import {ReloadFileCard} from "./ReloadFileCard/ReloadFileCard";
 
-export { Header, Layout, Nav, MovieCard, Footer };
+export { Header, Layout, Nav, MovieCard, Footer, OpenImage, ReloadFileCard };
+
+

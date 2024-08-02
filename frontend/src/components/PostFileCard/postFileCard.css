@@ -1,0 +1,68 @@
+.post-file-card {
+    position: absolute;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    /*margin: 100px auto;*/
+    width: 500px;
+    height: 195px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.background-card {
+    position: absolute;
+
+    /*margin-bottom: auto;*/
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 5px auto;
+    border-radius: 15px;
+
+    /*bottom: 0;*/
+
+    background-color: rgba(245,205,130,0.5);
+    width: 490px;
+    height: 185px;
+    z-index: -1;
+}
+
+.enter-name {
+    text-align: center;
+    margin-top: 0;
+}
+
+.form-control-card {
+    margin-bottom: 4px;
+    height: 90px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.d-grid {
+    display: flex;
+}
+
+
+.submit-btn {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid black;
+}
