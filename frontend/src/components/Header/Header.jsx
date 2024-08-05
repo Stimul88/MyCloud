@@ -3,27 +3,15 @@ import "./header.css"
 import logo from './logo.png';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {getAuthStatus} from "../../store/auth";
-import {cleanInfo, getEnterStatus, saveIdUser} from "../../store/login";
-import {useEffect, useState} from "react";
+import {cleanInfo, saveIdUser} from "../../store/login";
 import {loginWord} from "../../js/loginWord";
 import {fetchLogout} from "../../store/logout";
 import {cleanUserInfo} from "../../store/user";
 
 export const Header = () => {
-  const { userInfo } = useSelector((state) => state.user);
-  const { loginInfo, saveLogin, loginError } = useSelector((state) => state.login);
+  const { loginInfo, saveLogin } = useSelector((state) => state.login);
   const dispatch = useDispatch();
-  const [isAuth, setIsAuth] = useState(false)
 
-  // useEffect(() => {
-  //
-  // }, [isAuth])
-  //
-  // useEffect(() => {
-  //   dispatch(getEnterStatus(false))
-  //   // dispatch(getStatus(''))
-  // }, [])
 
   const logoutEnter = () => {
     dispatch(fetchLogout())
@@ -33,8 +21,6 @@ export const Header = () => {
 
     navigate('/')
     dispatch(cleanInfo())
-    // dispatch(getEnterStatus(false))
-    // dispatch(getAuthStatus(''))
   }
 
   const navigate = useNavigate();
@@ -66,7 +52,6 @@ export const Header = () => {
           >Выход</button>}
         </div>
       </header>
-      {/*<hr/>*/}
     </>
   );
 };

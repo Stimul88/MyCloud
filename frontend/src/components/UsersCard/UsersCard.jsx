@@ -1,10 +1,10 @@
 import './usersCard.css'
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {deleteStatus, fetchDisk} from "../../store/disk";
 import {calculateSum} from "../../js/calculateSum";
 import axios from "axios";
 import {deleteUserStatus} from "../../store/users";
+import {fetchDisk} from "../../store/disk";
 
 const server = process.env.REACT_APP_API_URL;
 
@@ -13,7 +13,6 @@ export const UsersCard = ({props}) => {
   const navigate = useNavigate();
 
   const { owners } = props
-  // console.log(calculateSum(owners))
 
   const getFiles = (e) => {
     e.preventDefault()
@@ -47,10 +46,6 @@ export const UsersCard = ({props}) => {
       <div
         onClick={deleteUser}
         className="delete">&#x2716;</div>
-
-      {/*<button*/}
-      {/*  onClick={getFiles}*/}
-      {/*  className="userCard">{props.username}</button>*/}
     </div>
   )
 }

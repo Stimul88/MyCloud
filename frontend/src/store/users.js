@@ -35,21 +35,9 @@ const users = createSlice({
   }
   ,
   reducers: {
-    // cleanInfo: (state) => {
-    //   state.info = {};
-    // },
     deleteUserStatus: (state, action) => {
       state.deleteUser = action.payload;
     },
-    // // getInfo: (state, action) => {
-    // //   state.info = action.payload;
-    // // },
-    // getEnterStatus: (state, action) => {
-    //   state.enterStatus = action.payload;
-    // },
-    // getRole: (state, action) => {
-    //   state.role = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.pending, (state) => {
@@ -73,5 +61,5 @@ const users = createSlice({
 });
 
 
-export const { deleteUserStatus, cleanInfo, getEnterStatus} = users.actions;
+export const { deleteUserStatus} = users.actions;
 export default users.reducer;

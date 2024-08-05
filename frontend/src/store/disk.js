@@ -8,23 +8,7 @@ export const fetchDisk= createAsyncThunk(
   'fetchDisk',
   async (id) => {
     const response = await axios.get(`${server}users/${id}/files/`)
-    // const response = await axios.get(`${server}/files/`)
-    // const response = await axios.get(`${server}users/${id}/`, config)
     return response.data
-    // try{
-    //   // const config = {
-    //   //   headers: {
-    //   //     'Content-Type': 'application/json',
-    //   //   },
-    //   //   withCredentials: true
-    //   // }
-    //   const response = await axios.get(`${server}users/${id}`)
-    //   // const response = await axios.get(`${server}users/${id}/`, config)
-    //   return response.data
-    // }
-    // catch (error) {
-    //   console.log('not auth')
-    // }
   }
 )
 
@@ -61,18 +45,6 @@ const disk = createSlice({
     saveData: (state, action) => {
       state.data = action.payload;
     },
-    // saveLogin: (state, action) => {
-    //   state.saveLogin = action.payload;
-    // },
-    // // getInfo: (state, action) => {
-    // //   state.info = action.payload;
-    // // },
-    // getEnterStatus: (state, action) => {
-    //   state.enterStatus = action.payload;
-    // },
-    // getRole: (state, action) => {
-    //   state.role = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchDisk.pending, (state) => {
@@ -91,8 +63,6 @@ const disk = createSlice({
       fetchDisk.rejected,(state, action) => {
         state.info = [];
         state.deleteStatus = '';
-        // state.loginLoad = false;
-        // state.loginError = action.payload;
       });
   }
 });

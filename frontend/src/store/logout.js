@@ -14,24 +14,13 @@ export const fetchLogout = createAsyncThunk(
         },
         withCredentials: true
       };
-      const response = await axios.post(`${server}logout/`, {
+      await axios.post(`${server}logout/`, {
         refresh_token: localStorage.getItem('refresh_token')
       }, config)
       axios.defaults.headers.common['Authorization'] = null;
-      // window.location.href = '/login'
     }catch(e){
       console.log('logout not work',e)
     }
-
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   withCredentials: true
-    // }
-
-    // const response = await axios.post(`${server}logout/`, user, config)
-    // return response.data
   }
 )
 
@@ -47,21 +36,7 @@ const logout = createSlice({
   }
   ,
   reducers: {
-    cleanInfo: (state) => {
-      state.info = {};
-    },
-    saveLogin: (state, action) => {
-      state.saveLogin = action.payload;
-    },
-    // getInfo: (state, action) => {
-    //   state.info = action.payload;
-    // },
-    getEnterStatus: (state, action) => {
-      state.enterStatus = action.payload;
-    },
-    // getRole: (state, action) => {
-    //   state.role = action.payload;
-    // },
+
   },
   extraReducers: (builder) => {
     builder.addCase(fetchLogout.pending, (state) => {
@@ -71,7 +46,6 @@ const logout = createSlice({
     });
     builder.addCase(
       fetchLogout.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.info = action.payload;
       });
     builder.addCase(
@@ -83,5 +57,4 @@ const logout = createSlice({
 });
 
 
-export const { saveLogin, cleanInfo, getEnterStatus} = logout.actions;
 export default logout.reducer;

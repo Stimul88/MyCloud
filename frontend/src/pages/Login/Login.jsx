@@ -2,11 +2,9 @@ import React, {useEffect, useState} from "react";
 import "./login.css"
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {clearAuthInfo,} from "../../store/auth";
 import {fetchLogin, saveLogin} from "../../store/login";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
-import {fetchDisk} from "../../store/disk";
 import {fetchUser} from "../../store/user";
 
 export function Login (){
@@ -17,10 +15,6 @@ export function Login (){
   const navigate = useNavigate();
 
   const {login, password} = inputData;
-
-  // useEffect(() => {
-  //   dispatch(clearAuthInfo(''))
-  // }, [])
 
 
   useEffect(() => {
@@ -56,10 +50,7 @@ export function Login (){
 
       const decoded = jwtDecode(access);
 
-
       dispatch(fetchUser(decoded.user_id))
-
-      // navigate("/disk")
     }
   }, [loginInfo, loginError])
 
@@ -125,9 +116,6 @@ export function Login (){
             disabled={login?.length === 0 || password?.length === 0}
             type="submit" className="enter-btn">Войти</button>
         </div>
-        {/*<p className="forgot-password text-right">*/}
-        {/*  Forgot <a href="#">password?</a>*/}
-        {/*</p>*/}
       </form>
     );
 }

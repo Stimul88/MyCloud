@@ -11,7 +11,6 @@ import moment from "moment";
 const server = process.env.REACT_APP_API_URL;
 
 export function FileCard({props}) {
-  const { openFile, hiddenClass, data } = useSelector((state) => state.disk);
   const dispatch = useDispatch();
 
   const handleClick = (url, filename) => {
@@ -21,8 +20,6 @@ export function FileCard({props}) {
       .then((res) => {
         fileDownload(res.data, filename)
       })
-
-    // moment.locale("de").format('LLL')
 
     const newDate = moment().format('YYYY-MM-DD HH:mm')
 
@@ -50,20 +47,9 @@ export function FileCard({props}) {
   }
 
   const renameInfo = (event) => {
-
-    // console.log(event.target.id)
-
     dispatch(saveData(props))
-
-    // axios
-    //   (`${server}/file/${props.id}`)
-    //   .then(response => {
-    //     dispatch(saveData(response.data))
-    //   })
-
     dispatch(getReloadStatus(true))
 
-    // event.target.value = null;
   }
 
   const deleteFile = () => {

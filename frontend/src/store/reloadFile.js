@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const server = process.env.REACT_APP_API_URL;
-// const token = localStorage.token
 
 
 export const fetchPutFile = createAsyncThunk(
@@ -10,9 +9,6 @@ export const fetchPutFile = createAsyncThunk(
   async (data,  { rejectWithValue }) => {
 
     const { id, dataInfo } = data
-
-    // const newObj =
-
 
     try{
       const config = {

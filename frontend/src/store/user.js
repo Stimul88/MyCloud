@@ -37,18 +37,6 @@ const user = createSlice({
     cleanUserInfo: (state) => {
       state.userInfo = {};
     },
-    // saveLogin: (state, action) => {
-    //   state.saveLogin = action.payload;
-    // },
-    // // getInfo: (state, action) => {
-    // //   state.info = action.payload;
-    // // },
-    // getEnterStatus: (state, action) => {
-    //   state.enterStatus = action.payload;
-    // },
-    // getRole: (state, action) => {
-    //   state.role = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {

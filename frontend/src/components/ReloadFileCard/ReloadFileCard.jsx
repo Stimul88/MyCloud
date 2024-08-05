@@ -1,12 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
-import {fetchPostFile} from "../../store/postFile";
-import {saveData, saveFileInfo} from "../../store/disk";
+import {saveData} from "../../store/disk";
 import './reloadFileCard.css';
 import {fetchPutFile, getReloadStatus} from "../../store/reloadFile";
 
 export const ReloadFileCard = () => {
-  const { idUser } = useSelector((state) => state.login);
   const { data } = useSelector((state) => state.disk);
   const [inputData, setInputData] = useState({text: data.title, nameFile: data.filename})
   const dispatch = useDispatch();

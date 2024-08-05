@@ -2,16 +2,8 @@ from django.conf import settings
 from django.urls import path, re_path
 from django.views.static import serve
 
-# from backend.api.views import HomeView, UserView, FilesView, LogoutView, RegisterView
-
 from api.views import LogoutView, RegisterView, UserWithFilesView, UserView, DeleteFile, FilesView, FileView, \
     SomeMethodView, DeleteUser
-
-# FileDeleteView
-
-# from api.views import create_files
-
-# from backend.api.views import FilesViewPost
 
 urlpatterns = [
     path('users/', UserWithFilesView.as_view(), name='users'),
@@ -21,11 +13,6 @@ urlpatterns = [
     path('users/<pk>/files/', FilesView.as_view(), name='files'),
     path('delete/<pk>/', DeleteFile.as_view(), name='delete_file'),
     path('delete_user/<pk>/', DeleteUser.as_view(), name='delete_user'),
-    # path('files/', FilesView.as_view(), name='files'),
-    # path('files/', PostAPIView.as_view(), name='filesGet'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view()),
-
-
 ]
-# path('download/', download),

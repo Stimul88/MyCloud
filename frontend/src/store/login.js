@@ -11,19 +11,16 @@ export const fetchLogin = createAsyncThunk(
     const config = {
       headers: {
         'Content-Type': 'application/json',
-
       },
       withCredentials: true
     }
       const response = await axios.post(`${server}token/`, user, config)
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${user['access']}`;
       return response.data
     }
     catch (error) {
       if (error.response.status === 401) {
         return rejectWithValue({ message: error.response.status })
       }
-      // return rejectWithValue({message: 'Some Other message'})
     }
   }
 )
@@ -51,15 +48,9 @@ const login = createSlice({
     saveIdUser: (state, action) => {
       state.idUser = action.payload;
     },
-    // getInfo: (state, action) => {
-    //   state.info = action.payload;
-    // },
     getEnterStatus: (state, action) => {
       state.enterStatus = action.payload;
     },
-    // getRole: (state, action) => {
-    //   state.role = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchLogin.pending, (state) => {
@@ -84,5 +75,5 @@ const login = createSlice({
 });
 
 
-export const { saveLogin, cleanInfo, getEnterStatus, saveIdUser} = login.actions;
+export const { saveLogin, cleanInfo, saveIdUser} = login.actions;
 export default login.reducer;

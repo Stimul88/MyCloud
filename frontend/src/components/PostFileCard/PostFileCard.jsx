@@ -7,20 +7,12 @@ import {saveData, saveFileInfo} from "../../store/disk";
 export const PostFileCard = () => {
   const { idUser } = useSelector((state) => state.login);
   const {  data } = useSelector((state) => state.disk);
-  // const {  data } = useSelector((state) => state.disk);
   const [inputData, setInputData] = useState({text: '', nameFile: `${data.name}`})
   const dispatch = useDispatch();
 
   const { text, nameFile } = inputData
 
   const submitFile = () => {
-    // const body = {
-    //   id: idUser,
-    //   fileName: nameFile,
-    //   size: props.size,
-    //   title: text,
-    //   path: props,
-    // }
     const body = {
       id: idUser,
       fileName: nameFile,
@@ -29,7 +21,6 @@ export const PostFileCard = () => {
       path: data,
     }
 
-    // console.log(fileInfo)
     dispatch(fetchPostFile(body))
     dispatch(saveData(''))
     dispatch(saveFileInfo(false))

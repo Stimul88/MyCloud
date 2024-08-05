@@ -17,24 +17,14 @@ export function Disk() {
   const { idUser } = useSelector((state) => state.login);
   const {  reloadStatus, reloadResponse } = useSelector((state) => state.reloadFile);
   const { response } = useSelector((state) => state.postFile);
-  const { file } = useSelector((state) => state.download);
-  // const [data, setInputData] = useState('')
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [el, setEl] = useState('')
-  // const [body, setBody] = useState('')
 
   useEffect(() => {
     if(response !== 'OK') return;
-    // if(response.status === '') return;
 
     const decoded = jwtDecode(localStorage.getItem('access_token'));
     dispatch(fetchDisk(decoded.user_id))
-    // dispatch(fetchDisk(info.id))
-
-
-
-    // console.log(status.status)
 
   }, [response])
 
@@ -51,41 +41,10 @@ export function Disk() {
   useEffect(() => {
     if(!reloadResponse) return;
 
-    console.log(reloadResponse)
-
     const decoded = jwtDecode(localStorage.getItem('access_token'));
     dispatch(fetchDisk(decoded.user_id))
 
-    // dispatch(fetchDisk(info.id))
-
   }, [reloadResponse])
-
-  // || deleteStatus === ''
-
-  // useEffect(() => {
-  //   if(file === '') return;
-  //
-  //   const url = window.URL.createObjectURL(new Blob([file]));
-  //   console.log(url)
-  //   saveFile(url)
-  //   // url.click()
-  //
-  //
-  //   // const decoded = jwtDecode(localStorage.getItem('access_token'));
-  //   // dispatch(fetchDisk(decoded.user_id))
-  //
-  //   // console.log(status.status)
-  //
-  // }, [file])
-
-  // useEffect(() => {
-  //   const decoded = jwtDecode(localStorage.getItem('access_token'));
-  //   dispatch(fetchDisk(decoded.user_id))
-  // }, [info])
-
-
-
-
 
   useEffect(() => {
     if(localStorage.getItem('access_token') === null) {
@@ -93,9 +52,7 @@ export function Disk() {
     } else {
       const decoded = jwtDecode(localStorage.getItem('access_token'));
       dispatch(fetchDisk(decoded.user_id))
-      // dispatch(fetchDisk(info.id))
       dispatch(saveIdUser(decoded.user_id))
-      // dispatch(saveIdUser(info.id))
       dispatch(saveData(''))
       dispatch(saveFileInfo(false))
       dispatch(getReloadStatus(false))
@@ -119,7 +76,6 @@ export function Disk() {
       reader.readAsDataURL(fileObj)
     }
     dispatch(saveData(fileObj))
-    // setInputData(fileObj)
 
     dispatch(saveFileInfo(true))
     event.target.value = null;
@@ -150,7 +106,6 @@ export function Disk() {
       </div>
       {fileInfo &&
         <PostFileCard
-          // props={data}
         />}
       {reloadStatus &&
         <ReloadFileCard
