@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  django:
+    build: ./backend
+    container_name: djangoapp
+    restart: always
+    ports:
+      - 8000:8000
+#    env_file:
+#      - ./.env.dev
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - django_media_volume:/usr/src/app/media
+#    networks:
+#      - myNetwork
+
+  node:
+    build: ./frontend
+    container_name: reactapp
+    restart: always
+    ports:
+      - 3000:3000
+    command: npm start
+    depends_on:
+      - django
+#    networks:
+#      - myNetwork
+
+#  db:
+#    image: postgres
+#    environment:
+#      POSTGRES_USER: ${PG_USERNAME}
+#      POSTGRES_PASSWORD: ${PG_PASSWORD}
+#      POSTGRES_DB: ${PG_DATABASE}
+#    volumes:
+#      - ./data:/var/lib/postgresql/data
+#    ports:
+#      - 5432:5432
+
+
+volumes:
+  django_media_volume:
+
+
+
+#    env_file:
+#      - ./.env.dev
