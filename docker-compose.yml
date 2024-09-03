@@ -1,6 +1,8 @@
 version: '3.9'
 
 services:
+  db:
+    image: postgres
   backend:
     build: ./backend
     container_name: backend
@@ -10,7 +12,6 @@ services:
 #    env_file:
 #      - ./.env.dev
     command: >
-      sh -c "python manage.py migrate"
       sh -c "python manage.py runserver 0.0.0.0:8000"
     volumes:
       - django_media_volume:/usr/src/app/media
@@ -40,6 +41,14 @@ services:
 #      - ./data:/var/lib/postgresql/data
 #    ports:
 #      - 5432:5432
+
+ migration:
+    image: uzman
+    command: python manage.py migrate --noinput
+    volumes:
+      - .:/code
+    depends_on:
+      - db
 
 
 volumes:
