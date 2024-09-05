@@ -1,9 +1,13 @@
-FROM python:3.10-alpine
+FROM python:3.10
 
 WORKDIR /backend
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc \
+    && pip install psycopg2
 
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
