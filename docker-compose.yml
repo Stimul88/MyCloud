@@ -1,30 +1,83 @@
 version: '3.9'
 
+
 services:
-  backend:
+  db:
+    image: postgres:13.3
+    env_file: .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  #      environment:
+  #        - "POSTGRES_HOST_AUTH_METHOD=trust"
+  api:
     build: ./backend
+    env_file: .env
     container_name: backend
     restart: always
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - 8000:8000
-#    env_file:
-#      - ./.env.dev
-    command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+#    command: >
+#          sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+#    network_mode: host
     volumes:
-      - django_media_volume:/usr/src/app/media
-#    networks:
-#      - myNetwork
+          - django_media_volume:/usr/src/app/media
+#    command: bash -c "python manage.py runserver 0.0.0.0:8000"
 
-  frontend:
+  web:
     build: ./frontend
     container_name: frontend
     restart: always
     ports:
       - 3000:3000
-    command: npm start
-    depends_on:
-      - backend
+
+volumes:
+  django_media_volume:
+  postgres_data:
+
+
+#services:
+##  postgres:
+##    image: postgres:13.3
+##    environment:
+##      POSTGRES_USER: ${DB_USER}
+##      POSTGRES_PASSWORD: ${DB_PASSWORD}
+##      POSTGRES_DB: ${DB_NAME}
+##      PGDATA: "/var/lib/postgresql/data/pgdata"
+##    volumes:
+##      - ../2. Init Database:/docker-entrypoint-initdb.d
+##        - habrdb-data:/var/lib/postgresql/data
+##    ports:
+##      - "5432:5432"
+#
+#  backend:
+#    build: ./backend
+#    container_name: backend
+#    restart: always
+#    ports:
+#      - 8000:8000
+##    env_file:
+##      - ./.env.dev
+#    command: >
+#      sh -c "python manage.py runserver 0.0.0.0:8000"
+#    volumes:
+#      - django_media_volume:/usr/src/app/media
+##    networks:
+##      - myNetwork
+#
+#  frontend:
+#    build: ./frontend
+#    container_name: frontend
+#    restart: always
+#    ports:
+#      - 3000:3000
+#    command: npm start
+#    depends_on:
+#      - backend
 #    networks:
 #      - myNetwork
 
@@ -51,11 +104,12 @@ services:
 #      - db
 
 
-volumes:
-  django_media_volume:
+#volumes:
+#  django_media_volume:
+#  habrdb-data:
 #  data:
 
-
+#      sh -c "python manage.py runserver 0.0.0.0:8000"
 
 #    env_file:
 #      - ./.env.dev

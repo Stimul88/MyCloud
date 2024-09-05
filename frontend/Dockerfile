@@ -1,15 +1,11 @@
-#FROM ubuntu:latest
-#LABEL authors="StimUL"
-#
-#ENTRYPOINT ["top", "-b"]
-
 FROM node:18-alpine as build
-WORKDIR /usr/src
-#RUN npm install
-#ADD ./public ./public
-#ADD ./src ./src
 
+WORKDIR /frontend
 
-COPY ./ ./
+COPY . .
+
 RUN npm install
+
+EXPOSE 3000
+
 CMD ["npm", "start"]

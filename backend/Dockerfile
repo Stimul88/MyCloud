@@ -1,18 +1,7 @@
-FROM python:3.10
-
-WORKDIR /usr/src/app
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
-
-RUN pip install --upgrade pip
-COPY ./requirements.txt .
+FROM python:3.10-alpine
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /backend
+COPY requirements.txt /backend/
 RUN pip install -r requirements.txt
-#RUN python manage.py migrate
-
 COPY . .
-
-ENTRYPOINT ["/usr/src/app/entrypoint.sh" ]
