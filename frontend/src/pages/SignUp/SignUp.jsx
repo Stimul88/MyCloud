@@ -22,11 +22,12 @@ export function SignUp() {
   //   console.log(authError)
   // }, [])
 
-  console.log(process.env.REACT_APP_API_URL)
+
 
   
   useEffect(() => {
     console.log(authInfo)
+    console.log(process.env.REACT_APP_API_URL)
 
     // if(authError !== ''){
     //   dispatch(clearAuthError(''))
