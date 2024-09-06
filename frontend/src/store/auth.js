@@ -8,9 +8,10 @@ export const fetchAuth = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     const response = await axios.post(`${server}register/`, data)
     return response.data
-
   }
 )
+
+console.log(server)
 
 const auth = createSlice({
   name: "auth",
