@@ -5,18 +5,13 @@ ARG REACT_APP_DEBUG
 ENV REACT_APP_DEBUG=$REACT_APP_DEBUG
 
 # that will be empty
-#RUN echo "DEBUG": $REACT_APP_DEBUG
-RUN echo->docker-compose run  client node process.env.REACT_APP_DEBUG 'TRUE'
+RUN echo "DEBUG": $REACT_APP_DEBUG
 
 WORKDIR /frontend
 
 COPY . .
 
 RUN npm install
-
-ARG REACT_APP_API_URL
-
-ENV REACT_APP_API_URL $REACT_APP_API_URL
 
 EXPOSE 3000
 
