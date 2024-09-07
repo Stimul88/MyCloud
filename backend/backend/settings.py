@@ -262,7 +262,7 @@ AUTH_USER_MODEL = 'api.User'
 # CORS_ALLOW_HEADERS = "access-control-allow-origin"
 
 # CSRF_TRUSTED_ORIGINS = [env('FRONT_URL')]
-CSRF_TRUSTED_ORIGINS = [env('DB_HOST'),]
+# CSRF_TRUSTED_ORIGINS = [env('DB_HOST'),]
 # CORS_ORIGIN_WHITELIST = (
 #     env('FRONT_URL'),
 # )
