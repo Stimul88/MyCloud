@@ -25,7 +25,7 @@ services:
     depends_on:
       - db
     volumes:
-          - django_media_volume:/media
+          - django_media_volume:/backend/media
 
   web:
     build: ./frontend

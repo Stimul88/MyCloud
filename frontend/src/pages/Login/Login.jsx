@@ -54,7 +54,7 @@ export function Login (){
       dispatch(saveLogin(login))
       localStorage.clear()
       localStorage.setItem('access_token', access)
-      localStorage.setItem('refresh_token', refresh)
+      localStorage.setItem('refresh_token', loginInfo.refresh)
       axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
 
       const decoded = jwtDecode(access);

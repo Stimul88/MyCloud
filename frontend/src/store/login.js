@@ -64,7 +64,7 @@ const login = createSlice({
     builder.addCase(
       fetchLogin.fulfilled, (state, action) => {
         state.loginInfo = action.payload;
-        state.refresh = action.payload.refresh;
+        // state.refresh = action.payload.refresh;
         state.access = action.payload.access;
 
       });

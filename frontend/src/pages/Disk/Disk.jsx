@@ -28,6 +28,10 @@ export function Disk() {
 
   }, [response])
 
+  console.log(info)
+
+
+
   useEffect(() => {
     if(deleteStatus !== "deleted successfully!") return;
 
