@@ -5,6 +5,7 @@ services:
     image: postgres:13.3
     env_file: ./backend/.env
     container_name: postgres
+    restart: always
     ports:
       - "5432:5432"
     volumes:
@@ -14,6 +15,7 @@ services:
     build: ./backend
     container_name: backend
     restart: always
+
     command: >
       bash -c
         "python3 manage.py migrate

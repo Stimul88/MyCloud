@@ -51,6 +51,9 @@ const login = createSlice({
     getEnterStatus: (state, action) => {
       state.enterStatus = action.payload;
     },
+      cleanError: (state) => {
+          state.loginError = {};
+      },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchLogin.pending, (state) => {
@@ -75,5 +78,5 @@ const login = createSlice({
 });
 
 
-export const { saveLogin, cleanInfo, saveIdUser} = login.actions;
+export const { cleanError, saveLogin, cleanInfo, saveIdUser} = login.actions;
 export default login.reducer;

@@ -21,6 +21,7 @@ const auth = createSlice({
     authLoading: false,
     role: 'user',
     authError: "",
+    authStatus: '',
   }
   ,
   reducers: {
@@ -30,25 +31,31 @@ const auth = createSlice({
     clearAuthError: (state, action) => {
       state.authError = action.payload;
     },
+    clearAuthStatus: (state, action) => {
+      state.authStatus = '';
+    },
 
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAuth.pending, (state) => {
       state.authInfo = '';
       state.authError = '';
+      state.authStatus = '';
     });
     builder.addCase(
       fetchAuth.fulfilled, (state, action) => {
         state.authInfo = action.payload;
-        state.authError = '';
+        // state.authInfo = action.payload;
+        state.authStatus = 'Ok';
       });
     builder.addCase(
       fetchAuth.rejected,(state, action) => {
         state.authError = action.error.message || 'Server Error';
+        state.authStatus = '';
       });
   }
 });
 
 
-export const { clearAuthInfo, clearAuthError } = auth.actions;
+export const { clearAuthInfo, clearAuthError, clearAuthStatus } = auth.actions;
 export default auth.reducer;

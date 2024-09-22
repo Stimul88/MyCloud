@@ -35,7 +35,7 @@ export function FileCard({props}) {
   }
 
   const copyLink = async () => {
-    await navigator.clipboard.writeText(`${server}${props.url}`);
+    await navigator.clipboard.writeText(`${server}${props.path}`);
 
     alert('ссылка скопирована')
 

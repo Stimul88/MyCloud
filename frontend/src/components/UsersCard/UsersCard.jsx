@@ -17,7 +17,9 @@ export const UsersCard = ({props}) => {
   const getFiles = (e) => {
     e.preventDefault()
     dispatch(fetchDisk(props.id))
-    navigate('/userdisk')
+      navigate('/disk')
+    // navigate('/userdisk')
+
   }
 
   const deleteUser = () => {

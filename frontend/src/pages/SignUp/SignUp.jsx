@@ -1,12 +1,12 @@
 import "./signUp.css";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {clearAuthError, clearAuthInfo, fetchAuth} from "../../store/auth";
+import {clearAuthError, clearAuthInfo, clearAuthStatus, fetchAuth} from "../../store/auth";
 import {useDispatch, useSelector} from "react-redux";
 import Regexes from "../../js/Regexes";
 
 export function SignUp() {
-  const { authInfo, authError } = useSelector((state) => state.auth);
+  const { authInfo, authStatus, authError } = useSelector((state) => state.auth);
   // const { enterStatus } = useSelector((state) => state.login);
   // const [inputData, setInputData] = useState({login: '', fullName: '',email: '', password: '', toggle: false})
   const [inputData, setInputData] = useState({login: '', fullName: '',email: '', password: '', toggle: false})
@@ -21,25 +21,41 @@ export function SignUp() {
   //   dispatch(clearAuthInfo(''))
   //   console.log(authError)
   // }, [])
+    console.log(authStatus)
+    console.log(authInfo)
+    console.log(authError)
 
 
 
   
   useEffect(() => {
-    console.log(authInfo)
-    console.log(process.env.REACT_APP_API_URL)
+      console.log(authStatus)
+      if(authStatus === 'Ok') {
+          navigate("/login")
+          dispatch(clearAuthStatus())
+      }
 
-    // if(authError !== ''){
-    //   dispatch(clearAuthError(''))
-    //   alert('Юзер с таким логином или паролем уже существует')
-    //   return
-    // }
-    if(Object.keys(authInfo).length){
-
-
-      navigate("/login")
+    if(authError === 'Request failed with status code 400'){
+      dispatch(clearAuthError(''))
+      alert('Юзер с таким логином или паролем уже существует')
+      return
     }
-  }, [authInfo, authError])
+    // if(Object.keys(authInfo).length){
+    //
+    //
+    //   navigate("/login")
+    // }
+  }, [authStatus, authError])
+
+    // useEffect(() => {
+    //
+    //     if(Object.keys(authInfo).length){
+    //         navigate("/login")
+    //     }
+    // }, [authInfo])
+
+
+
 
   const regexes = new Regexes();
 

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import "./login.css"
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchLogin, saveLogin} from "../../store/login";
+import {cleanError, fetchLogin, saveLogin} from "../../store/login";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 import {fetchUser} from "../../store/user";
@@ -36,6 +36,15 @@ export function Login (){
 
   useEffect(() => {
     // if(Object.keys(userInfo).length === 0) return;
+    // if(loginError === {}) {
+    //   navigate("*")
+    //   return
+    // }
+    if(loginError === undefined) {
+      navigate("*")
+      dispatch(cleanError())
+      return
+    }
     if(loginError.message === 401) {
 
       alert('Неправильно введен логин или пароль!')

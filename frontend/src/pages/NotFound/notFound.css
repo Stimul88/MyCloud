@@ -1,4 +1,5 @@
 .notFound {
+    margin: 0 auto;
     display: grid;
     place-content: center;
     text-align: center;
