@@ -35,12 +35,21 @@ export function FileCard({props}) {
   }
 
   const copyLink = async () => {
-    await navigator.clipboard.writeText(`${server}${props.path}`);
-
-    alert('ссылка скопирована')
+      try {
+          await navigator.clipboard.writeText(`${server}${props.path}`);
+      } catch (e) {
+          console.log(e);
+      }
 
   }
 
+
+    // const copyLink = async () => {
+    //     await navigator.clipboard.writeText(`${server}${props.path}`);
+    //
+    //     alert('ссылка скопирована')
+    //
+    // }
   const open = () => {
     dispatch(openEl(`${server}${props.path}`))
     dispatch(hiddenTag(''))
